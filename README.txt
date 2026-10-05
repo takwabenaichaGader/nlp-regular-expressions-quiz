@@ -1,84 +1,53 @@
-NLP — REGULAR EXPRESSIONS — GUIDED SELF-ASSESSMENT
-===================================================
+NLP — Regular Expressions — Guided Self-Assessment
 
-Course
-------
-Natural Language Processing (NLP)
-5th Year AI & Data Science Engineering
+Course: Natural Language Processing (NLP)
+Audience: 5th Year AI & Data Science Engineering
 Teacher: Dr. Ing. Takwa Ben Aïcha Gader
 CV: https://www.doyoubuzz.com/takwa-ben-aicha-gder
 
-Purpose
--------
-This static website is a guided 20-question self-assessment on the Regular Expressions section of the NLP course.
-It is designed to be used at the end of the lesson to help students test and reinforce the fundamental concepts.
+FILES
+- index.html
+- style.css
+- quiz.js
+- README.txt
 
-The quiz covers:
-- deterministic regex-based text processing
-- text as character strings
-- concatenation, alternation and Kleene star
-- ?, +, {n}, {n,m}, {n,}
+PURPOSE
+This static website is a guided self-assessment on the fundamentals of regular expressions in NLP. It combines conceptual revision with practical regex construction.
+
+QUIZ CONTENT
+- 30 questions in total
+- Questions 1–20: multiple-choice questions on regex foundations
+- Questions 21–30: pattern-writing exercises where students type their own regular expressions
+- Immediate feedback after every question
+- Short concept reminders
+- One valid solution shown after validation for pattern-writing exercises
+- Hidden positive/negative examples are used to accept equivalent working regex patterns
+- Final score and percentage
+- Mastery by concept
+- Personalized list of questions to review
+
+TOPICS
+- deterministic role of regex in NLP
+- character strings
+- concatenation and alternation
+- Kleene star
+- quantifiers ?, +, {n}, {n,m}, {n,}
 - character classes and ranges
-- \d, \s and \w shortcuts
-- start/end anchors and escaping
-- named groups
-- practical course patterns: Tunisian phone numbers, image files and error lines
-- strengths and limits of regex in NLP
+- anchors ^ and $
+- escaping special characters
+- shortcuts such as \d and \w
+- Python-style named groups
+- practical patterns: Tunisian phone numbers, image filenames, error lines, text files, dates, identifiers, hashtags and simplified email-like patterns
 
-Pedagogical features
---------------------
-- 20 progressively structured questions
-- immediate feedback after validation
-- a concept reminder after every question
-- final percentage and score
-- mastery by concept
-- personalized list of questions to review
-- retry, reset and copy-result buttons
-- responsive design for laptops, tablets and phones
-- no personal data collection
+RUN LOCALLY
+Place all four files in the same folder and open index.html in a modern browser.
 
-Files
------
-index.html  : website structure
-style.css   : complete visual design
-quiz.js     : question bank + quiz logic
-README.txt  : this file
+DEPLOY ON GITHUB PAGES
+1. Create a public GitHub repository.
+2. Upload index.html, style.css, quiz.js and README.txt to the repository root.
+3. Open Settings > Pages.
+4. Under Build and deployment, choose "Deploy from a branch".
+5. Select branch "main" and folder "/ (root)".
+6. Save and wait for GitHub Pages to publish the site.
 
-Run locally
------------
-1. Keep all four files in the same folder.
-2. Double-click index.html or open it in a browser.
-3. No server, build tool or dependency is required.
-
-Publish with GitHub Pages
--------------------------
-1. Create a new GitHub repository, for example:
-   nlp-regular-expressions-quiz
-
-2. Upload the four files directly to the ROOT of the repository:
-   index.html
-   style.css
-   quiz.js
-   README.txt
-
-3. Commit the files.
-
-4. Open the repository Settings tab.
-
-5. Open Pages.
-
-6. Under "Build and deployment":
-   Source: Deploy from a branch
-   Branch: main
-   Folder: / (root)
-
-7. Save.
-
-8. After deployment, GitHub will display a public URL similar to:
-   https://YOUR-USERNAME.github.io/nlp-regular-expressions-quiz/
-
-Important
----------
-Do not put index.html inside another nested folder when deploying to GitHub Pages unless you intentionally configure the deployment that way.
-
-The site uses only HTML, CSS and vanilla JavaScript. It does not require a backend and does not collect personal data.
+No backend and no personal-data collection are required.

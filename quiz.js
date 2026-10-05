@@ -203,6 +203,137 @@ const QUESTIONS = [
     correct: 0,
     explanation: "Regex is powerful for search, validation, splitting, replacement and extraction when the text structure is known. Its rules are explicit and require language/task knowledge.",
     reminder: "Use regex when the target is defined by form or structure. Use richer NLP models when context and meaning are central."
+  },
+  {
+    id: 21,
+    type: "regex",
+    category: "Pattern writing",
+    difficulty: "Easy",
+    question: "Write a regular expression that matches a Tunisian local phone number containing exactly 8 digits.",
+    context: "It must match <code>22123456</code>, but reject <code>2212345</code>, <code>221234567</code>, and <code>22A23456</code>.",
+    positive: ["22123456", "98765432"],
+    negative: ["2212345", "221234567", "22A23456", "+21622123456"],
+    solution: "^\\d{8}$",
+    explanation: "The anchors force the entire string to follow the rule, while <code>\\d{8}</code> requires exactly eight digits.",
+    reminder: "Build the pattern from the structure: start anchor + 8 digits + end anchor."
+  },
+  {
+    id: 22,
+    type: "regex",
+    category: "Pattern writing",
+    difficulty: "Medium",
+    question: "Write a regular expression for a Tunisian phone number with an optional <code>+216</code> prefix followed by exactly 8 digits.",
+    context: "It must match both <code>22123456</code> and <code>+21622123456</code>, but reject <code>21622123456</code> and <code>+2162212345</code>.",
+    positive: ["22123456", "+21622123456", "98765432", "+21698765432"],
+    negative: ["21622123456", "+2162212345", "+216221234567", "+21722123456"],
+    solution: "^(\\+216)?\\d{8}$",
+    explanation: "The escaped plus sign is part of the literal country code. Grouping <code>\\+216</code> and adding <code>?</code> makes the entire prefix optional.",
+    reminder: "Use parentheses to group a multi-character unit before applying a quantifier such as <code>?</code>."
+  },
+  {
+    id: 23,
+    type: "regex",
+    category: "Pattern writing",
+    difficulty: "Medium",
+    question: "Write a regular expression that matches a simple image filename ending in <code>.gif</code>, <code>.jpeg</code>, <code>.jpg</code>, <code>.eps</code>, <code>.svg</code>, or <code>.png</code>.",
+    context: "Examples to accept: <code>photo.jpg</code>, <code>figure_2.png</code>. Reject <code>notes.txt</code> and <code>image.bmp</code>.",
+    positive: ["photo.jpg", "figure_2.png", "diagram.svg", "scan.jpeg", "icon.gif", "plot.eps"],
+    negative: ["notes.txt", "image.bmp", "photojpg", ".jpg", "a.pdf"],
+    solution: "^\\w+\\.(gif|jpeg|jpg|eps|svg|png)$",
+    explanation: "The filename is matched with one or more word characters, the dot is escaped, and alternation lists the allowed extensions.",
+    reminder: "When several endings are valid, group them and separate alternatives with <code>|</code>."
+  },
+  {
+    id: 24,
+    type: "regex",
+    category: "Pattern writing",
+    difficulty: "Medium",
+    question: "Write a regular expression that matches an entire log line only when it begins with the literal text <code>[Error]</code>.",
+    context: "It must match <code>[Error] File not found</code> and <code>[Error]42</code>, but reject <code>Warning [Error] later</code>.",
+    positive: ["[Error] File not found", "[Error]42", "[Error]"],
+    negative: ["Warning [Error] later", "Error File not found", "[Warning] Error", "x[Error]"],
+    solution: "^\\[Error\\].*$",
+    explanation: "The brackets must be escaped because square brackets normally define a character class. The start anchor requires <code>[Error]</code> to appear first.",
+    reminder: "Escape metacharacters when you want to match them literally: <code>\\[</code> and <code>\\]</code>."
+  },
+  {
+    id: 25,
+    type: "regex",
+    category: "Pattern writing",
+    difficulty: "Easy",
+    question: "Write a regular expression that matches a complete filename ending with the literal extension <code>.txt</code>.",
+    context: "Accept <code>report.txt</code> and <code>notes_2026.txt</code>. Reject <code>report.csv</code> and <code>report.txt.bak</code>.",
+    positive: ["report.txt", "notes_2026.txt", "a.txt", "my-report.txt"],
+    negative: ["report.csv", "report.txt.bak", "txt", "reporttxt"],
+    solution: "^.*\\.txt$",
+    explanation: "The escaped dot means a literal period and the end anchor ensures that <code>.txt</code> is the final part of the filename.",
+    reminder: "A literal dot is written <code>\\.</code>; an unescaped dot means any character."
+  },
+  {
+    id: 26,
+    type: "regex",
+    category: "Pattern writing",
+    difficulty: "Medium",
+    question: "Write a regular expression for a date written in the form <code>DD/MM/YYYY</code>.",
+    context: "Accept structurally valid examples such as <code>05/11/2026</code> and <code>31/12/2025</code>. For this exercise, you only need to validate the format, not the real calendar date.",
+    positive: ["05/11/2026", "31/12/2025", "01/01/2000"],
+    negative: ["5/11/2026", "05-11-2026", "05/11/26", "x05/11/2026", "05/11/2026x"],
+    solution: "^\\d{2}/\\d{2}/\\d{4}$",
+    explanation: "The format consists of two digits, a slash, two digits, a slash, and four digits. Anchors ensure that nothing appears before or after the date.",
+    reminder: "Regex can validate a textual format without necessarily validating its real-world meaning."
+  },
+  {
+    id: 27,
+    type: "regex",
+    category: "Pattern writing",
+    difficulty: "Medium",
+    question: "Write a regular expression that matches student identifiers with the form <code>AI_2026_123</code>.",
+    context: "The identifier must start with <code>AI_</code>, then contain exactly 4 digits, an underscore, and exactly 3 digits.",
+    positive: ["AI_2026_123", "AI_0001_999", "AI_2025_001"],
+    negative: ["DS_2026_123", "AI_26_123", "AI_2026_12", "XAI_2026_123", "AI_2026_1234"],
+    solution: "^AI_\\d{4}_\\d{3}$",
+    explanation: "Literal text can be combined directly with fixed-length digit blocks using <code>{n}</code>.",
+    reminder: "Translate each fixed part of the required format into one regex component, then concatenate the components."
+  },
+  {
+    id: 28,
+    type: "regex",
+    category: "Pattern writing",
+    difficulty: "Easy",
+    question: "Write a regular expression that matches a complete hashtag made of <code>#</code> followed by one or more word characters.",
+    context: "Accept <code>#NLP</code>, <code>#NLP2026</code>, and <code>#AI_DS</code>. Reject <code>#</code>, <code>NLP</code>, and <code>#NLP!</code>.",
+    positive: ["#NLP", "#NLP2026", "#AI_DS", "#x"],
+    negative: ["#", "NLP", "#NLP!", "x#NLP", "#NLP test"],
+    solution: "^#\\w+$",
+    explanation: "The hash is literal, <code>\\w+</code> requires at least one word character, and anchors force the whole string to be a hashtag.",
+    reminder: "Use <code>+</code> when at least one occurrence is required."
+  },
+  {
+    id: 29,
+    type: "regex",
+    category: "Pattern writing",
+    difficulty: "Medium",
+    question: "Write a simple regular expression for an email-like address with a three-letter final extension.",
+    context: "Accept examples such as <code>student@example.com</code> and <code>takwa.ben-aicha@univ.edu</code>. This is a simplified educational pattern, not a complete RFC email validator.",
+    positive: ["student@example.com", "user123@test.org", "takwa.ben-aicha@univ.edu", "a_b@dept.net"],
+    negative: ["studentexample.com", "student@example", "student@example.co", "student@.com", "student example@test.com"],
+    solution: "^[\\w.-]+@([\\w-]+\\.)+[\\w-]{3}$",
+    explanation: "The pattern combines a local part, the <code>@</code> symbol, one or more domain labels ending in dots, and a final three-character extension.",
+    reminder: "Real email syntax is more complex; here the goal is to practice grouping, repetition, classes and escaped dots."
+  },
+  {
+    id: 30,
+    type: "regex",
+    category: "Named-group writing",
+    difficulty: "Challenge",
+    question: "Write a Python-style regular expression that captures the day, month and year of a date such as <code>05-11-2026</code> using named groups.",
+    context: "Use the group names <code>day</code>, <code>month</code>, and <code>year</code>. The required Python syntax is <code>(?P&lt;name&gt;...)</code>.",
+    positive: ["05-11-2026", "31-12-2025", "01-01-2000"],
+    negative: ["5-11-2026", "05/11/2026", "05-11-26", "x05-11-2026"],
+    requiredNamedGroups: ["day", "month", "year"],
+    solution: "^(?P<day>\\d{2})-(?P<month>\\d{2})-(?P<year>\\d{4})$",
+    explanation: "Each part of the date is captured by a descriptive named group. This makes extracted structured information easier to access and understand in Python.",
+    reminder: "Python named-group syntax is <code>(?P&lt;group_name&gt;expression)</code>."
   }
 ];
 
@@ -211,7 +342,8 @@ const state = {
   score: 0,
   selected: null,
   validated: false,
-  answers: Array(QUESTIONS.length).fill(null)
+  answers: Array(QUESTIONS.length).fill(null),
+  correctness: Array(QUESTIONS.length).fill(null)
 };
 
 const $ = (id) => document.getElementById(id);
@@ -233,6 +365,7 @@ function startQuiz() {
   state.selected = null;
   state.validated = false;
   state.answers = Array(QUESTIONS.length).fill(null);
+  state.correctness = Array(QUESTIONS.length).fill(null);
   homeView.classList.add("hidden");
   resultView.classList.add("hidden");
   quizView.classList.remove("hidden");
@@ -250,20 +383,47 @@ function renderQuestion() {
   $("categoryBadge").textContent = q.category;
   $("difficultyBadge").textContent = q.difficulty;
   $("questionTitle").innerHTML = q.question;
-  $("questionContext").classList.add("hidden");
+
+  if (q.context) {
+    $("questionContext").innerHTML = q.context;
+    $("questionContext").classList.remove("hidden");
+  } else {
+    $("questionContext").classList.add("hidden");
+    $("questionContext").innerHTML = "";
+  }
 
   answersEl.innerHTML = "";
-  q.choices.forEach((choice, i) => {
-    const button = document.createElement("button");
-    button.type = "button";
-    button.className = "answer-option";
-    button.setAttribute("role", "radio");
-    button.setAttribute("aria-checked", "false");
-    button.dataset.index = i;
-    button.innerHTML = `<span class="answer-letter">${String.fromCharCode(65 + i)}</span><span class="answer-text">${choice}</span>`;
-    button.addEventListener("click", () => selectAnswer(i));
-    answersEl.appendChild(button);
-  });
+  if (q.type === "regex") {
+    const wrapper = document.createElement("div");
+    wrapper.className = "regex-practice";
+    wrapper.innerHTML = `
+      <label for="regexInput" class="regex-label">Your regular expression</label>
+      <input id="regexInput" class="regex-input" type="text" autocomplete="off" spellcheck="false"
+             placeholder="Example: ^\\d{8}$" aria-describedby="regexHelp">
+      <p id="regexHelp" class="regex-help">Enter the pattern only. You may also use <code>/pattern/</code> notation. Equivalent working patterns are accepted when they pass the hidden examples.</p>
+    `;
+    answersEl.appendChild(wrapper);
+    const input = $("regexInput");
+    input.addEventListener("input", () => { state.selected = input.value; });
+    input.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        validateAnswer();
+      }
+    });
+  } else {
+    q.choices.forEach((choice, i) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "answer-option";
+      button.setAttribute("role", "radio");
+      button.setAttribute("aria-checked", "false");
+      button.dataset.index = i;
+      button.innerHTML = `<span class="answer-letter">${String.fromCharCode(65 + i)}</span><span class="answer-text">${choice}</span>`;
+      button.addEventListener("click", () => selectAnswer(i));
+      answersEl.appendChild(button);
+    });
+  }
 
   feedbackEl.className = "feedback hidden";
   feedbackEl.innerHTML = "";
@@ -282,18 +442,93 @@ function selectAnswer(i) {
   });
 }
 
+function parseRegexInput(raw) {
+  let pattern = raw.trim();
+  let flags = "";
+  if (pattern.startsWith("/")) {
+    const lastSlash = pattern.lastIndexOf("/");
+    if (lastSlash > 0) {
+      flags = pattern.slice(lastSlash + 1).replace(/[gy]/g, "");
+      pattern = pattern.slice(1, lastSlash);
+    }
+  }
+  // The course uses Python-style named groups. Modern JavaScript uses (?<name>...).
+  // Translate only for validation in the browser; the student's original answer is preserved.
+  const jsPattern = pattern.replace(/\(\?P<([A-Za-z_]\w*)>/g, "(?<$1>");
+  return { pattern, jsPattern, flags };
+}
+
+function validateRegexPattern(q, raw) {
+  try {
+    const { pattern, jsPattern, flags } = parseRegexInput(raw);
+    if (!pattern) return { correct: false, error: "The pattern is empty." };
+
+    if (q.requiredNamedGroups) {
+      const missing = q.requiredNamedGroups.filter(name => {
+        const py = `(?P<${name}>`;
+        const js = `(?<${name}>`;
+        return !pattern.includes(py) && !pattern.includes(js);
+      });
+      if (missing.length) {
+        return { correct: false, error: `Missing required named group(s): ${missing.join(", ")}.` };
+      }
+    }
+
+    const regex = new RegExp(jsPattern, flags);
+    const passes = (text) => { regex.lastIndex = 0; return regex.test(text); };
+    const allPositive = q.positive.every(passes);
+    const allNegative = q.negative.every(text => !passes(text));
+    return { correct: allPositive && allNegative, error: null };
+  } catch (err) {
+    return { correct: false, error: `Syntax error: ${err.message}` };
+  }
+}
+
 function validateAnswer() {
+  const q = QUESTIONS[state.index];
+  if (state.validated) return;
+
+  if (q.type === "regex") {
+    const input = $("regexInput");
+    const raw = input ? input.value.trim() : "";
+    if (!raw) {
+      feedbackEl.className = "feedback bad";
+      feedbackEl.innerHTML = `<h3>Write a pattern first.</h3><p>Enter the regular expression you would use, then validate it.</p>`;
+      return;
+    }
+
+    const result = validateRegexPattern(q, raw);
+    const correct = result.correct;
+    state.validated = true;
+    state.answers[state.index] = raw;
+    state.correctness[state.index] = correct;
+    if (correct) state.score += 1;
+    input.disabled = true;
+    input.classList.add(correct ? "regex-correct" : "regex-wrong");
+
+    feedbackEl.className = `feedback ${correct ? "good" : "bad"}`;
+    feedbackEl.innerHTML = `
+      <h3>${correct ? "Correct — your pattern passes the test cases." : "Not quite — refine the pattern."}</h3>
+      ${result.error ? `<p><strong>Technical feedback:</strong> ${escapeText(result.error)}</p>` : ""}
+      <p><strong>One valid solution:</strong> <code>${escapeText(q.solution)}</code></p>
+      <p><strong>Why:</strong> ${q.explanation}</p>
+      <p class="reminder"><strong>Concept reminder:</strong> ${q.reminder}</p>
+    `;
+    $("validateBtn").disabled = true;
+    $("nextBtn").disabled = false;
+    return;
+  }
+
   if (state.selected === null) {
     feedbackEl.className = "feedback bad";
     feedbackEl.innerHTML = `<h3>Select an answer first.</h3><p>Choose the option you think is correct, then validate it.</p>`;
     return;
   }
-  if (state.validated) return;
 
-  const q = QUESTIONS[state.index];
   const correct = state.selected === q.correct;
   state.validated = true;
   state.answers[state.index] = state.selected;
+  state.correctness[state.index] = correct;
   if (correct) state.score += 1;
 
   [...answersEl.children].forEach((button, idx) => {
@@ -360,7 +595,7 @@ function renderMastery() {
   QUESTIONS.forEach((q, i) => {
     grouped[q.category] ??= { total: 0, correct: 0 };
     grouped[q.category].total += 1;
-    if (state.answers[i] === q.correct) grouped[q.category].correct += 1;
+    if (state.correctness[i]) grouped[q.category].correct += 1;
   });
 
   const container = $("masteryGrid");
@@ -382,10 +617,10 @@ function renderMastery() {
 function renderMistakes() {
   const container = $("mistakeList");
   container.innerHTML = "";
-  const mistakes = QUESTIONS.map((q, i) => ({ q, i })).filter(({ q, i }) => state.answers[i] !== q.correct);
+  const mistakes = QUESTIONS.map((q, i) => ({ q, i })).filter(({ i }) => state.correctness[i] !== true);
 
   if (mistakes.length === 0) {
-    container.innerHTML = `<div class="no-mistakes">Excellent — all 20 answers are correct. You can now focus on writing and testing your own patterns.</div>`;
+    container.innerHTML = `<div class="no-mistakes">Excellent — all ${QUESTIONS.length} answers are correct, including the pattern-writing exercises.</div>`;
     return;
   }
 
@@ -393,13 +628,23 @@ function renderMistakes() {
     const selected = state.answers[i];
     const card = document.createElement("article");
     card.className = "mistake-card";
-    card.innerHTML = `
-      <h3>Question ${i + 1} · ${q.question}</h3>
-      <p><strong>Your answer:</strong> ${selected === null ? "No answer" : q.choices[selected]}</p>
-      <p><strong>Correct answer:</strong> ${q.choices[q.correct]}</p>
-      <p>${q.explanation}</p>
-      <p class="mini-reminder">Remember: ${q.reminder}</p>
-    `;
+    if (q.type === "regex") {
+      card.innerHTML = `
+        <h3>Question ${i + 1} · ${q.question}</h3>
+        <p><strong>Your pattern:</strong> ${selected === null ? "No answer" : `<code>${escapeText(selected)}</code>`}</p>
+        <p><strong>One valid solution:</strong> <code>${escapeText(q.solution)}</code></p>
+        <p>${q.explanation}</p>
+        <p class="mini-reminder">Remember: ${q.reminder}</p>
+      `;
+    } else {
+      card.innerHTML = `
+        <h3>Question ${i + 1} · ${q.question}</h3>
+        <p><strong>Your answer:</strong> ${selected === null ? "No answer" : q.choices[selected]}</p>
+        <p><strong>Correct answer:</strong> ${q.choices[q.correct]}</p>
+        <p>${q.explanation}</p>
+        <p class="mini-reminder">Remember: ${q.reminder}</p>
+      `;
+    }
     container.appendChild(card);
   });
 }
@@ -410,7 +655,7 @@ function copyResult() {
   QUESTIONS.forEach((q, i) => {
     grouped[q.category] ??= { total: 0, correct: 0 };
     grouped[q.category].total += 1;
-    if (state.answers[i] === q.correct) grouped[q.category].correct += 1;
+    if (state.correctness[i]) grouped[q.category].correct += 1;
   });
 
   const lines = [
