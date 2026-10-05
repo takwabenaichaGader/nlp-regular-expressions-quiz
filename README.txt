@@ -12,32 +12,36 @@ FILES
 - README.txt
 
 PURPOSE
-This static website is a guided self-assessment on the fundamentals of regular expressions in NLP. It combines conceptual revision with practical regex construction.
+This static website is a guided self-assessment on the fundamentals of regular expressions in NLP. It combines conceptual revision with hands-on regular-expression construction.
 
 QUIZ CONTENT
-- 30 questions in total
+- 35 questions in total
 - Questions 1–20: multiple-choice questions on regex foundations
-- Questions 21–30: pattern-writing exercises where students type their own regular expressions
-- Immediate feedback after every question
-- Short concept reminders
-- One valid solution shown after validation for pattern-writing exercises
-- Hidden positive/negative examples are used to accept equivalent working regex patterns
+- Questions 21–35: regex-writing exercises where students type their own expressions
+- Interactive validation using positive and negative test examples
+- Equivalent working regex patterns are accepted based on behavior rather than exact text equality
+- Invalid regex syntax is handled gracefully
+- Immediate explanation and concept reminder after every question
+- A possible solution is shown after each regex-writing exercise
 - Final score and percentage
 - Mastery by concept
-- Personalized list of questions to review
+- Personalized review of mistakes
 
-TOPICS
-- deterministic role of regex in NLP
-- character strings
-- concatenation and alternation
-- Kleene star
-- quantifiers ?, +, {n}, {n,m}, {n,}
-- character classes and ranges
-- anchors ^ and $
-- escaping special characters
-- shortcuts such as \d and \w
+PRACTICAL TOPICS
+- exact digit patterns
+- Tunisian phone numbers
+- optional +216 prefix
+- .txt files
+- image file extensions
+- [Error] lines
+- DD/MM/YYYY and DD-MM-YYYY dates
+- AI identifiers
+- hashtags
+- simplified email-like strings
+- uppercase/lowercase word patterns
+- digit sequences inside text
+- alternation
 - Python-style named groups
-- practical patterns: Tunisian phone numbers, image filenames, error lines, text files, dates, identifiers, hashtags and simplified email-like patterns
 
 RUN LOCALLY
 Place all four files in the same folder and open index.html in a modern browser.
@@ -50,4 +54,4 @@ DEPLOY ON GITHUB PAGES
 5. Select branch "main" and folder "/ (root)".
 6. Save and wait for GitHub Pages to publish the site.
 
-No backend and no personal-data collection are required.
+No backend is required and no personal data is collected.

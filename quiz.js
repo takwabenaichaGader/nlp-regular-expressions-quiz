@@ -206,134 +206,230 @@ const QUESTIONS = [
   },
   {
     id: 21,
-    type: "regex",
-    category: "Pattern writing",
+    type: "regex-input",
+    category: "Regex construction",
+    mastery: ["Regex construction", "Quantifiers", "Character classes", "Anchors", "Practical pattern matching"],
     difficulty: "Easy",
-    question: "Write a regular expression that matches a Tunisian local phone number containing exactly 8 digits.",
-    context: "It must match <code>22123456</code>, but reject <code>2212345</code>, <code>221234567</code>, and <code>22A23456</code>.",
-    positive: ["22123456", "98765432"],
-    negative: ["2212345", "221234567", "22A23456", "+21622123456"],
-    solution: "^\\d{8}$",
-    explanation: "The anchors force the entire string to follow the rule, while <code>\\d{8}</code> requires exactly eight digits.",
-    reminder: "Build the pattern from the structure: start anchor + 8 digits + end anchor."
+    question: "Write a regular expression that matches exactly 8 digits.",
+    context: "Accept <code>12345678</code> and <code>87654321</code>. Reject <code>1234567</code>, <code>123456789</code>, and <code>1234ABCD</code>.",
+    positiveExamples: ["12345678", "87654321", "00000000"],
+    negativeExamples: ["1234567", "123456789", "1234ABCD", "x12345678", "12345678x"],
+    suggestedSolution: "^\\d{8}$",
+    explanation: "<code>\\d</code> matches a digit and <code>{8}</code> requires exactly eight repetitions. Anchors make the whole string follow the rule.",
+    conceptReminder: "Use <code>{n}</code> for exact repetition. Anchors <code>^</code> and <code>$</code> are useful when the complete string must match.",
+    fullMatch: true
   },
   {
     id: 22,
-    type: "regex",
-    category: "Pattern writing",
-    difficulty: "Medium",
-    question: "Write a regular expression for a Tunisian phone number with an optional <code>+216</code> prefix followed by exactly 8 digits.",
-    context: "It must match both <code>22123456</code> and <code>+21622123456</code>, but reject <code>21622123456</code> and <code>+2162212345</code>.",
-    positive: ["22123456", "+21622123456", "98765432", "+21698765432"],
-    negative: ["21622123456", "+2162212345", "+216221234567", "+21722123456"],
-    solution: "^(\\+216)?\\d{8}$",
-    explanation: "The escaped plus sign is part of the literal country code. Grouping <code>\\+216</code> and adding <code>?</code> makes the entire prefix optional.",
-    reminder: "Use parentheses to group a multi-character unit before applying a quantifier such as <code>?</code>."
+    type: "regex-input",
+    category: "Regex construction",
+    mastery: ["Regex construction", "Quantifiers", "Character classes", "Anchors", "Practical pattern matching"],
+    difficulty: "Easy",
+    question: "Write a regular expression for a Tunisian phone number containing exactly 8 digits.",
+    context: "Accept <code>22123456</code> and <code>98765432</code>. Reject <code>2212345</code>, <code>221234567</code>, and <code>22A23456</code>.",
+    positiveExamples: ["22123456", "98765432", "50112233"],
+    negativeExamples: ["2212345", "221234567", "22A23456", "+21622123456"],
+    suggestedSolution: "^\\d{8}$",
+    explanation: "A local Tunisian number in this exercise is represented as exactly eight digits.",
+    conceptReminder: "Translate the requirement literally: eight digits means <code>\\d{8}</code> or an equivalent form such as <code>[0-9]{8}</code>.",
+    fullMatch: true
   },
   {
     id: 23,
-    type: "regex",
-    category: "Pattern writing",
-    difficulty: "Medium",
-    question: "Write a regular expression that matches a simple image filename ending in <code>.gif</code>, <code>.jpeg</code>, <code>.jpg</code>, <code>.eps</code>, <code>.svg</code>, or <code>.png</code>.",
-    context: "Examples to accept: <code>photo.jpg</code>, <code>figure_2.png</code>. Reject <code>notes.txt</code> and <code>image.bmp</code>.",
-    positive: ["photo.jpg", "figure_2.png", "diagram.svg", "scan.jpeg", "icon.gif", "plot.eps"],
-    negative: ["notes.txt", "image.bmp", "photojpg", ".jpg", "a.pdf"],
-    solution: "^\\w+\\.(gif|jpeg|jpg|eps|svg|png)$",
-    explanation: "The filename is matched with one or more word characters, the dot is escaped, and alternation lists the allowed extensions.",
-    reminder: "When several endings are valid, group them and separate alternatives with <code>|</code>."
+    type: "regex-input",
+    category: "Regex construction",
+    mastery: ["Regex construction", "Quantifiers", "Escaping", "Groups", "Practical pattern matching"],
+    difficulty: "Easy",
+    question: "Write a regular expression that matches a Tunisian phone number with an optional <code>+216</code> prefix.",
+    context: "Accept both <code>22123456</code> and <code>+21622123456</code>. The prefix must be optional.",
+    positiveExamples: ["22123456", "+21622123456", "98765432", "+21698765432"],
+    negativeExamples: ["21622123456", "+2162212345", "+216221234567", "+21722123456"],
+    suggestedSolution: "^(\\+216)?\\d{8}$",
+    explanation: "The escaped plus sign is literal. Parentheses group <code>+216</code>, and <code>?</code> makes that whole group optional.",
+    conceptReminder: "Apply <code>?</code> to a group when several characters must become optional together. Escape <code>+</code> as <code>\\+</code> when it is literal.",
+    fullMatch: true
   },
   {
     id: 24,
-    type: "regex",
-    category: "Pattern writing",
-    difficulty: "Medium",
-    question: "Write a regular expression that matches an entire log line only when it begins with the literal text <code>[Error]</code>.",
-    context: "It must match <code>[Error] File not found</code> and <code>[Error]42</code>, but reject <code>Warning [Error] later</code>.",
-    positive: ["[Error] File not found", "[Error]42", "[Error]"],
-    negative: ["Warning [Error] later", "Error File not found", "[Warning] Error", "x[Error]"],
-    solution: "^\\[Error\\].*$",
-    explanation: "The brackets must be escaped because square brackets normally define a character class. The start anchor requires <code>[Error]</code> to appear first.",
-    reminder: "Escape metacharacters when you want to match them literally: <code>\\[</code> and <code>\\]</code>."
+    type: "regex-input",
+    category: "Regex construction",
+    mastery: ["Regex construction", "Anchors", "Escaping", "Practical pattern matching"],
+    difficulty: "Easy",
+    question: "Write a regular expression that matches filenames ending in <code>.txt</code>.",
+    context: "Accept <code>report.txt</code>, <code>notes.txt</code>, and <code>nlp_course.txt</code>. Reject <code>report.pdf</code>, <code>txt.report</code>, and <code>notes.txt.pdf</code>.",
+    positiveExamples: ["report.txt", "notes.txt", "nlp_course.txt", "a.txt", "my-report.txt"],
+    negativeExamples: ["report.pdf", "txt.report", "notes.txt.pdf", "reporttxt", "txt"],
+    suggestedSolution: "^.*\\.txt$",
+    explanation: "The dot in <code>.txt</code> must be escaped because an unescaped dot means any character. The end anchor keeps <code>.txt</code> at the end.",
+    conceptReminder: "Use <code>\\.</code> for a literal period and <code>$</code> to anchor the end of the string.",
+    fullMatch: true
   },
   {
     id: 25,
-    type: "regex",
-    category: "Pattern writing",
-    difficulty: "Easy",
-    question: "Write a regular expression that matches a complete filename ending with the literal extension <code>.txt</code>.",
-    context: "Accept <code>report.txt</code> and <code>notes_2026.txt</code>. Reject <code>report.csv</code> and <code>report.txt.bak</code>.",
-    positive: ["report.txt", "notes_2026.txt", "a.txt", "my-report.txt"],
-    negative: ["report.csv", "report.txt.bak", "txt", "reporttxt"],
-    solution: "^.*\\.txt$",
-    explanation: "The escaped dot means a literal period and the end anchor ensures that <code>.txt</code> is the final part of the filename.",
-    reminder: "A literal dot is written <code>\\.</code>; an unescaped dot means any character."
+    type: "regex-input",
+    category: "Regex construction",
+    mastery: ["Regex construction", "Alternation", "Groups", "Escaping", "Practical pattern matching"],
+    difficulty: "Easy–Medium",
+    question: "Write a regular expression that matches image filenames ending in <code>.gif</code>, <code>.jpeg</code>, <code>.jpg</code>, <code>.eps</code>, <code>.svg</code>, or <code>.png</code>.",
+    context: "Accept <code>photo.jpg</code>, <code>diagram.png</code>, and <code>logo.svg</code>. Reject <code>photo.txt</code> and <code>photo.jpg.txt</code>.",
+    positiveExamples: ["photo.jpg", "diagram.png", "logo.svg", "scan.jpeg", "icon.gif", "plot.eps", "figure_2.png"],
+    negativeExamples: ["photo.txt", "photo.jpg.txt", "image.bmp", "photojpg", ".jpg"],
+    suggestedSolution: "^\\w+\\.(gif|jpeg|jpg|eps|svg|png)$",
+    explanation: "A group containing alternatives lets the extension be one of several valid values. The period before the extension is escaped.",
+    conceptReminder: "Use parentheses to group alternatives and separate choices with <code>|</code>.",
+    fullMatch: true
   },
   {
     id: 26,
-    type: "regex",
-    category: "Pattern writing",
-    difficulty: "Medium",
-    question: "Write a regular expression for a date written in the form <code>DD/MM/YYYY</code>.",
-    context: "Accept structurally valid examples such as <code>05/11/2026</code> and <code>31/12/2025</code>. For this exercise, you only need to validate the format, not the real calendar date.",
-    positive: ["05/11/2026", "31/12/2025", "01/01/2000"],
-    negative: ["5/11/2026", "05-11-2026", "05/11/26", "x05/11/2026", "05/11/2026x"],
-    solution: "^\\d{2}/\\d{2}/\\d{4}$",
-    explanation: "The format consists of two digits, a slash, two digits, a slash, and four digits. Anchors ensure that nothing appears before or after the date.",
-    reminder: "Regex can validate a textual format without necessarily validating its real-world meaning."
+    type: "regex-input",
+    category: "Regex construction",
+    mastery: ["Regex construction", "Anchors", "Escaping", "Practical pattern matching"],
+    difficulty: "Easy–Medium",
+    question: "Write a regular expression that matches an entire line only when it begins with the literal text <code>[Error]</code>.",
+    context: "Accept <code>[Error] File not found</code>. Reject <code>Warning: File not found</code> and <code>Info [Error] something</code>.",
+    positiveExamples: ["[Error] File not found", "[Error]42", "[Error]"],
+    negativeExamples: ["Warning: File not found", "Info [Error] something", "Error File not found", "x[Error]"] ,
+    suggestedSolution: "^\\[Error\\].*$",
+    explanation: "Square brackets are regex metacharacters, so they must be escaped when matching the literal text <code>[Error]</code>. The start anchor requires it to appear first.",
+    conceptReminder: "Escape literal brackets as <code>\\[</code> and <code>\\]</code>. Use <code>^</code> to require the pattern at the start.",
+    fullMatch: true
   },
   {
     id: 27,
-    type: "regex",
-    category: "Pattern writing",
-    difficulty: "Medium",
-    question: "Write a regular expression that matches student identifiers with the form <code>AI_2026_123</code>.",
-    context: "The identifier must start with <code>AI_</code>, then contain exactly 4 digits, an underscore, and exactly 3 digits.",
-    positive: ["AI_2026_123", "AI_0001_999", "AI_2025_001"],
-    negative: ["DS_2026_123", "AI_26_123", "AI_2026_12", "XAI_2026_123", "AI_2026_1234"],
-    solution: "^AI_\\d{4}_\\d{3}$",
-    explanation: "Literal text can be combined directly with fixed-length digit blocks using <code>{n}</code>.",
-    reminder: "Translate each fixed part of the required format into one regex component, then concatenate the components."
+    type: "regex-input",
+    category: "Regex construction",
+    mastery: ["Regex construction", "Quantifiers", "Character classes", "Anchors", "Practical pattern matching"],
+    difficulty: "Easy–Medium",
+    question: "Write a simple regular expression for dates in the format <code>DD/MM/YYYY</code>.",
+    context: "Accept <code>05/11/2026</code> and <code>21/09/2026</code>. Reject <code>5/11/2026</code>, <code>05-11-2026</code>, and <code>05/11/26</code>. Calendar validity is not required.",
+    positiveExamples: ["05/11/2026", "21/09/2026", "31/12/2025", "01/01/2000"],
+    negativeExamples: ["5/11/2026", "05-11-2026", "05/11/26", "x05/11/2026", "05/11/2026x"],
+    suggestedSolution: "^\\d{2}/\\d{2}/\\d{4}$",
+    explanation: "The format is two digits, slash, two digits, slash, and four digits.",
+    conceptReminder: "Regex can validate a textual format without checking whether the date exists in the real calendar.",
+    fullMatch: true
   },
   {
     id: 28,
-    type: "regex",
-    category: "Pattern writing",
-    difficulty: "Easy",
-    question: "Write a regular expression that matches a complete hashtag made of <code>#</code> followed by one or more word characters.",
-    context: "Accept <code>#NLP</code>, <code>#NLP2026</code>, and <code>#AI_DS</code>. Reject <code>#</code>, <code>NLP</code>, and <code>#NLP!</code>.",
-    positive: ["#NLP", "#NLP2026", "#AI_DS", "#x"],
-    negative: ["#", "NLP", "#NLP!", "x#NLP", "#NLP test"],
-    solution: "^#\\w+$",
-    explanation: "The hash is literal, <code>\\w+</code> requires at least one word character, and anchors force the whole string to be a hashtag.",
-    reminder: "Use <code>+</code> when at least one occurrence is required."
+    type: "regex-input",
+    category: "Regex construction",
+    mastery: ["Regex construction", "Quantifiers", "Character classes", "Anchors", "Practical pattern matching"],
+    difficulty: "Easy–Medium",
+    question: "Write a regular expression that matches dates in the format <code>DD-MM-YYYY</code>.",
+    context: "Accept <code>05-11-2026</code> but reject <code>05/11/2026</code>.",
+    positiveExamples: ["05-11-2026", "21-09-2026", "31-12-2025"],
+    negativeExamples: ["05/11/2026", "5-11-2026", "05-11-26", "x05-11-2026", "05-11-2026x"],
+    suggestedSolution: "^\\d{2}-\\d{2}-\\d{4}$",
+    explanation: "Fixed hyphens separate fixed-length digit blocks.",
+    conceptReminder: "Concatenate literal separators and quantified digit blocks to mirror the required format.",
+    fullMatch: true
   },
   {
     id: 29,
-    type: "regex",
-    category: "Pattern writing",
-    difficulty: "Medium",
-    question: "Write a simple regular expression for an email-like address with a three-letter final extension.",
-    context: "Accept examples such as <code>student@example.com</code> and <code>takwa.ben-aicha@univ.edu</code>. This is a simplified educational pattern, not a complete RFC email validator.",
-    positive: ["student@example.com", "user123@test.org", "takwa.ben-aicha@univ.edu", "a_b@dept.net"],
-    negative: ["studentexample.com", "student@example", "student@example.co", "student@.com", "student example@test.com"],
-    solution: "^[\\w.-]+@([\\w-]+\\.)+[\\w-]{3}$",
-    explanation: "The pattern combines a local part, the <code>@</code> symbol, one or more domain labels ending in dots, and a final three-character extension.",
-    reminder: "Real email syntax is more complex; here the goal is to practice grouping, repetition, classes and escaped dots."
+    type: "regex-input",
+    category: "Regex construction",
+    mastery: ["Regex construction", "Quantifiers", "Character classes", "Anchors", "Practical pattern matching"],
+    difficulty: "Easy–Medium",
+    question: "Write a regular expression that matches an identifier formatted like <code>AI_2026_123</code>.",
+    context: "Rules: start with <code>AI_</code>, then exactly 4 digits, an underscore, and exactly 3 digits.",
+    positiveExamples: ["AI_2026_123", "AI_0001_999", "AI_2025_001"],
+    negativeExamples: ["AI2026_123", "AI_26_123", "AI_2026_12", "XAI_2026_123", "AI_2026_1234"],
+    suggestedSolution: "^AI_\\d{4}_\\d{3}$",
+    explanation: "Literal text is concatenated with two fixed-length digit blocks.",
+    conceptReminder: "Break a structured identifier into fixed literals and variable components, then translate each component into regex syntax.",
+    fullMatch: true
   },
   {
     id: 30,
-    type: "regex",
-    category: "Named-group writing",
-    difficulty: "Challenge",
-    question: "Write a Python-style regular expression that captures the day, month and year of a date such as <code>05-11-2026</code> using named groups.",
-    context: "Use the group names <code>day</code>, <code>month</code>, and <code>year</code>. The required Python syntax is <code>(?P&lt;name&gt;...)</code>.",
-    positive: ["05-11-2026", "31-12-2025", "01-01-2000"],
-    negative: ["5-11-2026", "05/11/2026", "05-11-26", "x05-11-2026"],
+    type: "regex-input",
+    category: "Regex construction",
+    mastery: ["Regex construction", "Quantifiers", "Character classes", "Practical pattern matching"],
+    difficulty: "Easy–Medium",
+    question: "Write a simple regular expression that matches hashtags such as <code>#NLP</code>, <code>#AI2026</code>, and <code>#Machine_Learning</code>.",
+    context: "The hashtag must begin with <code>#</code> followed by one or more word characters.",
+    positiveExamples: ["#NLP", "#AI2026", "#Machine_Learning", "#x"],
+    negativeExamples: ["#", "NLP", "#NLP!", "x#NLP", "#NLP test"],
+    suggestedSolution: "^#\\w+$",
+    explanation: "The hash is literal and <code>\\w+</code> requires one or more word characters.",
+    conceptReminder: "Use <code>+</code> when at least one occurrence is required. <code>\\w</code> commonly includes letters, digits, and underscore.",
+    fullMatch: true
+  },
+  {
+    id: 31,
+    type: "regex-input",
+    category: "Regex construction",
+    mastery: ["Regex construction", "Quantifiers", "Character classes", "Escaping", "Practical pattern matching"],
+    difficulty: "Medium",
+    question: "Write a simple educational regular expression that matches email-like strings such as <code>student@example.com</code> and <code>user123@test.org</code>.",
+    context: "This is a simplified exercise, not a complete official email validator. Reject <code>studentexample.com</code>, <code>student@</code>, and <code>@example.com</code>.",
+    positiveExamples: ["student@example.com", "user123@test.org", "a_b@dept.net"],
+    negativeExamples: ["studentexample.com", "student@", "@example.com", "student@example", "student example@test.com"],
+    suggestedSolution: "^[\\w.-]+@[\\w-]+\\.[A-Za-z]{2,}$",
+    explanation: "The pattern separates a local part, the <code>@</code> symbol, a domain, a literal dot, and a final alphabetic extension.",
+    conceptReminder: "For this exercise, focus on structure. Real-world email validation is much more complex than a short teaching regex.",
+    fullMatch: true
+  },
+  {
+    id: 32,
+    type: "regex-input",
+    category: "Regex construction",
+    mastery: ["Regex construction", "Character classes", "Quantifiers", "Anchors", "Practical pattern matching"],
+    difficulty: "Medium",
+    question: "Write a regular expression that matches a word beginning with one uppercase letter followed by one or more lowercase letters.",
+    context: "Accept <code>Paris</code>, <code>Takwa</code>, and <code>Nlp</code>. Reject <code>paris</code>, <code>PARIS</code>, and <code>P</code>.",
+    positiveExamples: ["Paris", "Takwa", "Nlp", "Data"],
+    negativeExamples: ["paris", "PARIS", "P", "Paris2", "xParis"],
+    suggestedSolution: "^[A-Z][a-z]+$",
+    explanation: "The first class requires one uppercase character; the second requires one or more lowercase characters.",
+    conceptReminder: "Character classes can express letter ranges: <code>[A-Z]</code> and <code>[a-z]</code>.",
+    fullMatch: true
+  },
+  {
+    id: 33,
+    type: "regex-input",
+    category: "Regex construction",
+    mastery: ["Regex construction", "Character classes", "Quantifiers", "Practical pattern matching"],
+    difficulty: "Medium",
+    question: "Write a regular expression that finds one or more consecutive digits in text.",
+    context: "It should find digit sequences such as <code>1</code>, <code>18</code>, <code>2026</code>, and the <code>18</code> inside <code>score = 18</code>.",
+    positiveExamples: ["1", "18", "2026", "123456", "score = 18", "year2026"],
+    negativeExamples: ["abc", "ABC", "no digits here"],
+    suggestedSolution: "\\d+",
+    explanation: "<code>\\d</code> matches a digit and <code>+</code> requires one or more consecutive digits.",
+    conceptReminder: "Do not anchor a regex when the goal is to find a matching substring inside larger text.",
+    fullMatch: false
+  },
+  {
+    id: 34,
+    type: "regex-input",
+    category: "Regex construction",
+    mastery: ["Regex construction", "Alternation", "Groups", "Anchors", "Practical pattern matching"],
+    difficulty: "Medium",
+    question: "Write a regular expression that matches exactly one of these words: <code>cat</code>, <code>dog</code>, or <code>bird</code>.",
+    context: "Accept <code>cat</code>, <code>dog</code>, and <code>bird</code>. Reject <code>cats</code>, <code>Dog</code>, and <code>fish</code>.",
+    positiveExamples: ["cat", "dog", "bird"],
+    negativeExamples: ["cats", "Dog", "fish", "hotdog", "birdhouse"],
+    suggestedSolution: "^(cat|dog|bird)$",
+    explanation: "Alternation expresses several allowed words. Anchors ensure that no extra characters are present.",
+    conceptReminder: "Use <code>|</code> for alternatives and group alternatives when they share surrounding constraints.",
+    fullMatch: true
+  },
+  {
+    id: 35,
+    type: "regex-input",
+    category: "Named groups",
+    mastery: ["Regex construction", "Named groups", "Groups", "Quantifiers", "Practical pattern matching"],
+    difficulty: "Medium / Advanced",
+    question: "Write a Python-style regular expression that captures the <code>day</code>, <code>month</code>, and <code>year</code> from <code>05/11/2026</code> using named groups.",
+    context: "Use the exact group names <code>day</code>, <code>month</code>, and <code>year</code>. Python syntax: <code>(?P&lt;name&gt;...)</code>.",
+    positiveExamples: ["05/11/2026", "31/12/2025", "01/01/2000"],
+    negativeExamples: ["5/11/2026", "05-11-2026", "05/11/26", "x05/11/2026"],
     requiredNamedGroups: ["day", "month", "year"],
-    solution: "^(?P<day>\\d{2})-(?P<month>\\d{2})-(?P<year>\\d{4})$",
-    explanation: "Each part of the date is captured by a descriptive named group. This makes extracted structured information easier to access and understand in Python.",
-    reminder: "Python named-group syntax is <code>(?P&lt;group_name&gt;expression)</code>."
+    requirePythonNamedGroups: true,
+    suggestedSolution: "^(?P<day>\\d{2})/(?P<month>\\d{2})/(?P<year>\\d{4})$",
+    explanation: "Each date component is captured in a descriptive Python named group, making structured extraction easier to read and use.",
+    conceptReminder: "Python named-group syntax is <code>(?P&lt;group_name&gt;expression)</code>. Named groups capture information and assign it a meaningful name.",
+    fullMatch: true
   }
 ];
 
@@ -357,6 +453,14 @@ function escapeText(value) {
   const div = document.createElement("div");
   div.textContent = value;
   return div.innerHTML;
+}
+
+function getReminder(q) {
+  return q.conceptReminder || q.reminder || "";
+}
+
+function getMasteryTags(q) {
+  return Array.isArray(q.mastery) && q.mastery.length ? q.mastery : [q.category];
 }
 
 function startQuiz() {
@@ -393,7 +497,7 @@ function renderQuestion() {
   }
 
   answersEl.innerHTML = "";
-  if (q.type === "regex") {
+  if (q.type === "regex-input") {
     const wrapper = document.createElement("div");
     wrapper.className = "regex-practice";
     wrapper.innerHTML = `
@@ -461,26 +565,48 @@ function parseRegexInput(raw) {
 function validateRegexPattern(q, raw) {
   try {
     const { pattern, jsPattern, flags } = parseRegexInput(raw);
-    if (!pattern) return { correct: false, error: "The pattern is empty." };
+    if (!pattern) return { correct: false, error: "The pattern is empty.", failedPositive: [], failedNegative: [] };
+
+    const regex = new RegExp(jsPattern, flags);
 
     if (q.requiredNamedGroups) {
       const missing = q.requiredNamedGroups.filter(name => {
         const py = `(?P<${name}>`;
         const js = `(?<${name}>`;
+        if (q.requirePythonNamedGroups) return !pattern.includes(py);
         return !pattern.includes(py) && !pattern.includes(js);
       });
       if (missing.length) {
-        return { correct: false, error: `Missing required named group(s): ${missing.join(", ")}.` };
+        return {
+          correct: false,
+          error: `Missing required Python-style named group(s): ${missing.join(", ")}.`,
+          failedPositive: [],
+          failedNegative: []
+        };
       }
     }
+    const matches = (text) => {
+      regex.lastIndex = 0;
+      const match = regex.exec(text);
+      if (!match) return false;
+      return q.fullMatch ? match[0] === text : true;
+    };
 
-    const regex = new RegExp(jsPattern, flags);
-    const passes = (text) => { regex.lastIndex = 0; return regex.test(text); };
-    const allPositive = q.positive.every(passes);
-    const allNegative = q.negative.every(text => !passes(text));
-    return { correct: allPositive && allNegative, error: null };
+    const failedPositive = q.positiveExamples.filter(text => !matches(text));
+    const failedNegative = q.negativeExamples.filter(text => matches(text));
+    return {
+      correct: failedPositive.length === 0 && failedNegative.length === 0,
+      error: null,
+      failedPositive,
+      failedNegative
+    };
   } catch (err) {
-    return { correct: false, error: `Syntax error: ${err.message}` };
+    return {
+      correct: false,
+      error: "Invalid regular expression. Check your syntax.",
+      failedPositive: [],
+      failedNegative: []
+    };
   }
 }
 
@@ -488,7 +614,7 @@ function validateAnswer() {
   const q = QUESTIONS[state.index];
   if (state.validated) return;
 
-  if (q.type === "regex") {
+  if (q.type === "regex-input") {
     const input = $("regexInput");
     const raw = input ? input.value.trim() : "";
     if (!raw) {
@@ -506,13 +632,20 @@ function validateAnswer() {
     input.disabled = true;
     input.classList.add(correct ? "regex-correct" : "regex-wrong");
 
+    const testFeedback = !correct && !result.error
+      ? `<p><strong>Test feedback:</strong> ${result.failedPositive.length ? "Some required examples were not matched. " : ""}${result.failedNegative.length ? "Some invalid examples were incorrectly matched." : ""}</p>`
+      : "";
+
     feedbackEl.className = `feedback ${correct ? "good" : "bad"}`;
     feedbackEl.innerHTML = `
-      <h3>${correct ? "Correct — your pattern passes the test cases." : "Not quite — refine the pattern."}</h3>
+      <h3>${correct
+        ? "Correct. Your regular expression matches the required examples and rejects the invalid ones."
+        : "Your expression does not yet satisfy all the required cases."}</h3>
       ${result.error ? `<p><strong>Technical feedback:</strong> ${escapeText(result.error)}</p>` : ""}
-      <p><strong>One valid solution:</strong> <code>${escapeText(q.solution)}</code></p>
-      <p><strong>Why:</strong> ${q.explanation}</p>
-      <p class="reminder"><strong>Concept reminder:</strong> ${q.reminder}</p>
+      ${testFeedback}
+      <p><strong>Possible solution:</strong> <code>${escapeText(q.suggestedSolution)}</code></p>
+      <p><strong>Explanation:</strong> ${q.explanation}</p>
+      <p class="reminder"><strong>Concept reminder:</strong> ${getReminder(q)}</p>
     `;
     $("validateBtn").disabled = true;
     $("nextBtn").disabled = false;
@@ -542,7 +675,7 @@ function validateAnswer() {
   feedbackEl.innerHTML = `
     <h3>${correct ? "Correct — good reasoning." : "Not quite — review the rule below."}</h3>
     <p><strong>Why:</strong> ${q.explanation}</p>
-    <p class="reminder"><strong>Concept reminder:</strong> ${q.reminder}</p>
+    <p class="reminder"><strong>Concept reminder:</strong> ${getReminder(q)}</p>
   `;
   $("validateBtn").disabled = true;
   $("nextBtn").disabled = false;
@@ -593,9 +726,11 @@ function showResults() {
 function renderMastery() {
   const grouped = {};
   QUESTIONS.forEach((q, i) => {
-    grouped[q.category] ??= { total: 0, correct: 0 };
-    grouped[q.category].total += 1;
-    if (state.correctness[i]) grouped[q.category].correct += 1;
+    getMasteryTags(q).forEach(tag => {
+      grouped[tag] ??= { total: 0, correct: 0 };
+      grouped[tag].total += 1;
+      if (state.correctness[i]) grouped[tag].correct += 1;
+    });
   });
 
   const container = $("masteryGrid");
@@ -628,13 +763,13 @@ function renderMistakes() {
     const selected = state.answers[i];
     const card = document.createElement("article");
     card.className = "mistake-card";
-    if (q.type === "regex") {
+    if (q.type === "regex-input") {
       card.innerHTML = `
         <h3>Question ${i + 1} · ${q.question}</h3>
         <p><strong>Your pattern:</strong> ${selected === null ? "No answer" : `<code>${escapeText(selected)}</code>`}</p>
-        <p><strong>One valid solution:</strong> <code>${escapeText(q.solution)}</code></p>
+        <p><strong>Possible solution:</strong> <code>${escapeText(q.suggestedSolution)}</code></p>
         <p>${q.explanation}</p>
-        <p class="mini-reminder">Remember: ${q.reminder}</p>
+        <p class="mini-reminder">Remember: ${getReminder(q)}</p>
       `;
     } else {
       card.innerHTML = `
@@ -642,7 +777,7 @@ function renderMistakes() {
         <p><strong>Your answer:</strong> ${selected === null ? "No answer" : q.choices[selected]}</p>
         <p><strong>Correct answer:</strong> ${q.choices[q.correct]}</p>
         <p>${q.explanation}</p>
-        <p class="mini-reminder">Remember: ${q.reminder}</p>
+        <p class="mini-reminder">Remember: ${getReminder(q)}</p>
       `;
     }
     container.appendChild(card);
@@ -653,9 +788,11 @@ function copyResult() {
   const pct = Math.round((state.score / QUESTIONS.length) * 100);
   const grouped = {};
   QUESTIONS.forEach((q, i) => {
-    grouped[q.category] ??= { total: 0, correct: 0 };
-    grouped[q.category].total += 1;
-    if (state.correctness[i]) grouped[q.category].correct += 1;
+    getMasteryTags(q).forEach(tag => {
+      grouped[tag] ??= { total: 0, correct: 0 };
+      grouped[tag].total += 1;
+      if (state.correctness[i]) grouped[tag].correct += 1;
+    });
   });
 
   const lines = [
