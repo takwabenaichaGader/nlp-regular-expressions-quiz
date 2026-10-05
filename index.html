@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Self-assessment quiz on regular expressions in Natural Language Processing." />
+  <title>NLP · Regular Expressions · Self-Assessment</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand-mark" aria-hidden="true">NLP</div>
+      <div class="topbar-copy">
+        <div class="eyebrow">NATURAL LANGUAGE PROCESSING · CHAPTER 3</div>
+        <div class="topbar-title">Regular Expressions · Guided Self-Assessment</div>
+      </div>
+      <a class="teacher-link" href="https://www.doyoubuzz.com/takwa-ben-aicha-gder" target="_blank" rel="noopener noreferrer">Dr. Ing. Takwa Ben Aïcha Gader ↗</a>
+    </header>
+
+    <main>
+      <section id="homeView" class="view home-view" aria-labelledby="homeTitle">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <div class="session-tag">NLP · REGULAR EXPRESSIONS</div>
+            <h1 id="homeTitle">Self-Assessment</h1>
+            <p class="hero-lead">
+              Test the core concepts from today’s lesson. Every question gives immediate feedback and a concise reminder, so the quiz also works as a revision guide.
+            </p>
+
+            <div class="meta-row" aria-label="Quiz information">
+              <span class="meta-chip"><strong>20</strong> questions</span>
+              <span class="meta-chip">≈ <strong>12–15 min</strong></span>
+              <span class="meta-chip"><strong>5th Year</strong> AI &amp; Data Science Engineering</span>
+            </div>
+
+            <div class="objective-panel">
+              <div class="objective-icon" aria-hidden="true">◎</div>
+              <div>
+                <h2>Learning objective</h2>
+                <p>Recognize, interpret and apply the essential building blocks of regular expressions before moving to more advanced NLP models.</p>
+              </div>
+            </div>
+
+            <div class="cta-row">
+              <button id="startBtn" class="btn btn-primary">Start the quiz</button>
+              <span class="privacy">No personal data is collected.</span>
+            </div>
+          </div>
+
+          <aside class="hero-visual" aria-label="Regular expression quick reference">
+            <div class="visual-title">PATTERN → MATCH → EXTRACT</div>
+            <div class="regex-terminal" aria-hidden="true">
+              <div class="terminal-bar"><span></span><span></span><span></span></div>
+              <div class="terminal-line"><span class="prompt">pattern</span> <code>(\+216)?\d{8}</code></div>
+              <div class="terminal-line"><span class="prompt">text</span> <code>+21622123456</code></div>
+              <div class="terminal-result">✓ match</div>
+            </div>
+            <div class="quick-grid">
+              <div><code>R|S</code><span>alternation</span></div>
+              <div><code>R*</code><span>0 or more</span></div>
+              <div><code>R+</code><span>1 or more</span></div>
+              <div><code>R?</code><span>optional</span></div>
+              <div><code>\d</code><span>digit</span></div>
+              <div><code>\w</code><span>word character</span></div>
+            </div>
+          </aside>
+        </div>
+
+        <div class="principle-strip">
+          <span class="principle-label">Key principle</span>
+          <strong>Match form and structure first; do not confuse pattern matching with semantic understanding.</strong>
+        </div>
+      </section>
+
+      <section id="quizView" class="view hidden" aria-labelledby="questionTitle">
+        <div class="quiz-header">
+          <div>
+            <div class="eyebrow">NLP · REGULAR EXPRESSIONS</div>
+            <div id="questionCounter" class="question-counter">Question 1 / 20</div>
+          </div>
+          <button id="resetBtn" class="btn btn-ghost">Reset</button>
+        </div>
+
+        <div class="progress-track" aria-hidden="true"><div id="progressBar" class="progress-bar"></div></div>
+
+        <article class="question-card">
+          <div class="question-meta">
+            <span id="categoryBadge" class="badge">Core concepts</span>
+            <span id="difficultyBadge" class="difficulty">Easy</span>
+          </div>
+
+          <h2 id="questionTitle">Question</h2>
+          <p id="questionContext" class="question-context hidden"></p>
+          <div id="answers" class="answers" role="radiogroup" aria-label="Answer choices"></div>
+
+          <div class="question-actions">
+            <button id="validateBtn" class="btn btn-primary">Validate my answer</button>
+            <button id="nextBtn" class="btn btn-secondary" disabled>Next question</button>
+          </div>
+
+          <div id="feedback" class="feedback hidden" aria-live="polite"></div>
+        </article>
+
+        <div class="quiz-footer-line">
+          <span>Understand · Apply · Reason</span>
+          <a href="https://www.doyoubuzz.com/takwa-ben-aicha-gder" target="_blank" rel="noopener noreferrer">Dr. Ing. Takwa Ben Aïcha Gader ↗</a>
+        </div>
+      </section>
+
+      <section id="resultView" class="view hidden" aria-labelledby="resultTitle">
+        <div class="result-head">
+          <div>
+            <div class="eyebrow">NLP · REGULAR EXPRESSIONS</div>
+            <h1 id="resultTitle">Your result</h1>
+          </div>
+          <button id="resultResetBtn" class="btn btn-ghost">Reset</button>
+        </div>
+
+        <div class="result-hero">
+          <div class="score-ring" aria-label="Final percentage"><span id="percentValue">0%</span></div>
+          <div class="result-copy">
+            <div id="scoreValue" class="score-value">0 / 20</div>
+            <h2 id="resultHeading">Diagnostic</h2>
+            <p id="resultMessage">Your personalized feedback will appear here.</p>
+          </div>
+        </div>
+
+        <section class="diagnostic-section">
+          <div class="section-title-row">
+            <div>
+              <div class="section-kicker">DIAGNOSTIC</div>
+              <h2>Mastery by concept</h2>
+            </div>
+          </div>
+          <div id="masteryGrid" class="mastery-grid"></div>
+        </section>
+
+        <div class="result-actions">
+          <button id="reviewBtn" class="btn btn-secondary">Review mistakes</button>
+          <button id="retryBtn" class="btn btn-primary">Retry quiz</button>
+          <button id="copyBtn" class="btn btn-ghost">Copy my result</button>
+        </div>
+
+        <section id="reviewSection" class="review-section">
+          <div class="section-kicker">PERSONALIZED CORRECTION</div>
+          <h2>Questions to review</h2>
+          <div id="mistakeList" class="mistake-list"></div>
+        </section>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>NLP · Regular Expressions · Guided Self-Assessment</span>
+      <a href="https://www.doyoubuzz.com/takwa-ben-aicha-gder" target="_blank" rel="noopener noreferrer">Dr. Ing. Takwa Ben Aïcha Gader ↗</a>
+    </footer>
+  </div>
+
+  <script src="quiz.js"></script>
+</body>
+</html>
